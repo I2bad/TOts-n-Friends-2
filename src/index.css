@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-on-surface font-body overflow-x-hidden;
+    selection-color: rgba(52, 55, 241, 0.15);
+  }
+
+  ::selection {
+    background-color: rgba(52, 55, 241, 0.15);
+    color: #3437f1;
+  }
+}
+
+@layer components {
+  .glass-nav {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-family: 'Material Symbols Outlined';
+  }
+
+  .material-symbols-filled {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-family: 'Material Symbols Outlined';
+  }
+
+  .text-gradient-primary {
+    background: linear-gradient(135deg, #3437f1, #8b8ef9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .noise-overlay {
+    position: relative;
+  }
+
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: inherit;
+  }
+
+  .scroll-snap-x {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .snap-start {
+    scroll-snap-align: start;
+  }
+}
+
+@layer utilities {
+  .tracking-tighter {
+    letter-spacing: -0.04em;
+  }
+
+  .tracking-tight {
+    letter-spacing: -0.025em;
+  }
+
+  .will-change-transform {
+    will-change: transform;
+  }
+}
+
+/* ── Loading screen animations (CSS-only = compositor thread, immune to main-thread jank) ── */
+@keyframes loader-spin-in {
+  0%   { opacity: 0; transform: scale(0.3) rotate(-200deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes loader-fade-up {
+  0%   { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes loader-dot-in {
+  0%   { opacity: 0; transform: scale(0) translateY(0); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes loader-bounce {
+  0%, 100% { transform: translateY(0); }
+  40%      { transform: translateY(-14px); }
+}
+
+/* ── Hero Spline container — full background on mobile, right-aligned on desktop ── */
+@media (min-width: 768px) {
+  .hero-spline-container {
+    left: auto !important;
+    right: -5%;
+    width: 60%;
+  }
+}
+
+/* Nav pill */
+.nav-pill-link {
+  color: #2d2a24;
+}
+.nav-pill-link:hover {
+  background-color: #2d2a24;
+  color: white !important;
+}
+.nav-pill-active {
+  background-color: #2d2a24 !important;
+  color: white !important;
+}
+
+/* Hide scrollbar for testimonials */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom cursor */
+.cursor-dot,
+.cursor-ring {
+  pointer-events: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+}
+
+@media (hover: none) {
+  html {
+    cursor: auto;
+  }
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}

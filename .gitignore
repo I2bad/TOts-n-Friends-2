@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+.env
+.env.*
+.vscode/
+.idea/
+*.log
+.claude/
+.playwright-mcp/
+CLAUDE.md
+DESIGN.md
+*.spline
+code.html
+screen.png
