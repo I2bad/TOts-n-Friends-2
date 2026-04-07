@@ -1,0 +1,140 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic:
+      - generic:
+        - navigation:
+          - generic:
+            - link "Nivora" [ref=e12] [cursor=pointer]:
+              - /url: ./
+              - generic [ref=e14]: Nivora
+            - generic:
+              - generic: Tuesday, 11:55:10 PM
+    - generic [ref=e15]:
+      - generic [ref=e17]:
+        - generic [ref=e18]:
+          - generic [ref=e19]:
+            - generic [ref=e20]:
+              - generic [ref=e21]:
+                - paragraph [ref=e23]: Contact us
+                - heading "Contact" [level=1] [ref=e26]
+              - paragraph [ref=e29]: Our mission is to empower designers, developers and agencies with the tools they need to build their digital products more efficiently.
+            - link "About us" [ref=e32] [cursor=pointer]:
+              - /url: ./about
+              - generic [ref=e34]: About us
+          - generic [ref=e35]:
+            - generic [ref=e36]:
+              - heading "Email" [level=5] [ref=e39]
+              - heading "info@nivora.com" [level=4] [ref=e42]:
+                - link "info@nivora.com" [ref=e43] [cursor=pointer]:
+                  - /url: mailto:info@nivora.com
+            - generic [ref=e44]:
+              - heading "Tel" [level=5] [ref=e47]
+              - heading "+1 415 555 0198" [level=4] [ref=e50]:
+                - link "+1 415 555 0198" [ref=e51] [cursor=pointer]:
+                  - /url: tel:+14155550198
+        - generic [ref=e53]:
+          - generic [ref=e54]:
+            - generic [ref=e55]:
+              - heading "Name" [level=5] [ref=e57]
+              - textbox "Name" [ref=e59]:
+                - /placeholder: Jane Smith
+            - generic [ref=e60]:
+              - heading "Email" [level=5] [ref=e62]
+              - textbox "Email" [ref=e64]:
+                - /placeholder: jane@nivora.com
+            - generic [ref=e65]:
+              - heading "Location" [level=5] [ref=e67]
+              - combobox "Location" [ref=e69]:
+                - option "Select…" [disabled] [selected]
+                - option "Amsterdam"
+                - option "Barcelona"
+          - button "Submit" [ref=e72] [cursor=pointer]:
+            - heading "Submit" [level=5] [ref=e74]
+      - generic [ref=e78]:
+        - generic [ref=e79]:
+          - heading "FREQUENTLY ASKED QUESTIONS" [level=2] [ref=e81]
+          - paragraph [ref=e83]: This is different we get that, you may have questions, here are some answers.
+        - generic [ref=e84]:
+          - generic [ref=e86] [cursor=pointer]:
+            - heading "What services offered?" [level=4] [ref=e89]
+            - paragraph [ref=e93]: We design and build modern, high-performing websites using Framer and custom components.
+          - generic [ref=e95] [cursor=pointer]:
+            - heading "Who is this for?" [level=4] [ref=e98]
+            - paragraph [ref=e102]: Ideal for startups, agencies, creators, and teams needing professional digital presence.
+          - generic [ref=e104] [cursor=pointer]:
+            - heading "How projects start?" [level=4] [ref=e107]
+            - paragraph [ref=e111]: Projects begin with clear requirements, goals, and timelines to ensure smooth execution.
+          - generic [ref=e113] [cursor=pointer]:
+            - heading "How long delivery?" [level=4] [ref=e116]
+            - paragraph [ref=e120]: Timelines vary by scope, but most projects are completed within two to four weeks.
+          - generic [ref=e122] [cursor=pointer]:
+            - heading "Is Framer required?" [level=4] [ref=e125]
+            - paragraph [ref=e129]: Yes, all templates and builds are optimized specifically for Framer workflows.
+          - generic [ref=e131] [cursor=pointer]:
+            - heading "Can we customize?" [level=4] [ref=e134]
+            - paragraph [ref=e138]: Everything is fully customizable, including layout, colors, components, and interactions.
+          - generic [ref=e140] [cursor=pointer]:
+            - heading "Do you offer support?" [level=4] [ref=e143]
+            - paragraph [ref=e147]: Yes, we provide guidance, documentation, and support to help you launch confidently.
+          - generic [ref=e149] [cursor=pointer]:
+            - heading "What about updates?" [level=4] [ref=e152]
+            - paragraph [ref=e156]: We regularly improve templates with updates, refinements, and new features.
+      - contentinfo
+    - contentinfo [ref=e159]:
+      - generic [ref=e161]:
+        - generic [ref=e162]:
+          - generic [ref=e163]:
+            - heading "+1 132 132 131" [level=5] [ref=e165]:
+              - link "+1 132 132 131" [ref=e166] [cursor=pointer]:
+                - /url: tel:+14155550198
+            - heading "TechHub Plaza, Suite 301 Main Street, Metro Tower, Floor 15" [level=5] [ref=e168]
+          - generic [ref=e169]:
+            - generic [ref=e170]:
+              - heading "Menu" [level=5] [ref=e172]
+              - generic [ref=e173]:
+                - link "About" [ref=e176] [cursor=pointer]:
+                  - /url: ./about
+                - link "Gallery" [ref=e179] [cursor=pointer]:
+                  - /url: ./gallery
+                - link "Article" [ref=e182] [cursor=pointer]:
+                  - /url: ./article
+                - link "Contact" [ref=e185] [cursor=pointer]:
+                  - /url: ./contact
+            - generic [ref=e186]:
+              - heading "Contacts" [level=5] [ref=e188]
+              - generic [ref=e189]:
+                - link "hello@nivora.com" [ref=e192] [cursor=pointer]:
+                  - /url: mailto:hello@nivora.com
+                - link "info@nivora.com" [ref=e195] [cursor=pointer]:
+                  - /url: mailto:info@nivora.com
+            - generic [ref=e196]:
+              - heading "Socials" [level=5] [ref=e198]
+              - generic [ref=e199]:
+                - link "X link" [ref=e202] [cursor=pointer]:
+                  - /url: https://x.com/Dmytri_Design
+                - link "Dribbble" [ref=e205] [cursor=pointer]:
+                  - /url: https://dribbble.com/Stylokit
+                - link "Linkedin" [ref=e208] [cursor=pointer]:
+                  - /url: https://www.linkedin.com/in/dmytri-design/
+        - generic [ref=e209]:
+          - heading "Copyright 2025" [level=5] [ref=e211]
+          - generic [ref=e212]:
+            - link "Privacy Policy" [ref=e215] [cursor=pointer]:
+              - /url: ./privacy-policy
+            - link "Terms of Use" [ref=e218] [cursor=pointer]:
+              - /url: ./terms
+      - group [ref=e221]:
+        - listitem [ref=e222]:
+          - heading "Nivora" [level=1] [ref=e224]
+        - listitem [ref=e225]:
+          - heading "Nivora" [level=1] [ref=e227]
+        - listitem [ref=e228]:
+          - heading "Nivora" [level=1] [ref=e230]
+        - listitem [ref=e231]:
+          - heading "Nivora" [level=1] [ref=e233]
+    - link "Remix template" [ref=e244] [cursor=pointer]:
+      - /url: https://www.framer.com/marketplace/templates/nivora/
+      - heading "Remix template" [level=6] [ref=e246]
+  - link "Create a free website with Framer, the website builder loved by startups, designers and agencies." [ref=e247] [cursor=pointer]:
+    - /url: https://www.framer.com
+    - paragraph [ref=e252]: Create a free website with Framer, the website builder loved by startups, designers and agencies.
