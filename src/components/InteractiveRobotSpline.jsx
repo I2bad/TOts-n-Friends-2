@@ -1,53 +1,29 @@
-import { Suspense, lazy, useRef, useEffect, useCallback } from 'react'
+import { Suspense, lazy, useCallback } from 'react'
 
 const Spline = lazy(() => import('@splinetool/react-spline'))
 
-/**
- * Double-RAF + buffer pattern:
- * Spline's onLoad fires when data is parsed, NOT when the GPU has compiled
- * shaders and painted the first frame. Two rAF passes + 100ms lets the
- * compositor flush the WebGL pipeline before we signal "ready".
- */
-function waitForGPU() {
-  return new Promise((resolve) => {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setTimeout(resolve, 100)
-      })
-    })
-  })
-}
-
 export function InteractiveRobotSpline({ scene, className, style, onReady }) {
-  const splineRef = useRef(null)
-
-  // Cleanup: dispose WebGL context on unmount to prevent memory leaks
-  useEffect(() => {
-    return () => {
-      if (splineRef.current) {
-        splineRef.current.dispose()
-        splineRef.current = null
-      }
-    }
-  }, [])
-
+  // react-spline v4 disposes the WebGL context in its own cleanup — no manual dispose needed.
+  // Double-calling dispose() crashes the runtime, so we removed the earlier useRef/useEffect pattern.
   const handleLoad = useCallback((splineApp) => {
-    // Store ref for cleanup
-    splineRef.current = splineApp
-
-    // Wait for GPU to actually finish rendering before signaling ready
-    waitForGPU().then(() => {
-      if (onReady) onReady()
-    })
+    if (!onReady) return
+    // Double-RAF + 100 ms lets the GPU flush shaders before we signal "ready"
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() =>
+        setTimeout(onReady, 100)
+      )
+    )
   }, [onReady])
 
   return (
-    <Suspense
-      fallback={
-        <div className={`w-full h-full flex items-center justify-center ${className ?? ''}`} />
-      }
-    >
-      <Spline scene={scene} className={className} style={style} onLoad={handleLoad} />
+    <Suspense fallback={<div className={`w-full h-full ${className ?? ''}`} />}>
+      <Spline
+        scene={scene}
+        className={className}
+        style={style}
+        onLoad={handleLoad}
+        renderOnDemand={false}
+      />
     </Suspense>
   )
 }

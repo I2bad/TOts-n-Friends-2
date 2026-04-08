@@ -104,12 +104,15 @@
   40%      { transform: translateY(-14px); }
 }
 
-/* ── Hero Spline container — full background on mobile, right-aligned on desktop ── */
-@media (min-width: 768px) {
+/* ── Hero Spline container — right-aligned beside the text ── */
+.hero-spline-container {
+  width: 62%;
+}
+
+@media (max-width: 767px) {
   .hero-spline-container {
-    left: auto !important;
-    right: -5%;
-    width: 60%;
+    width: 100%;
+    opacity: 0.35;
   }
 }
 
