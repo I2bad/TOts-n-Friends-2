@@ -123,6 +123,54 @@ Loaded in `index.html` via `<link>` tags.
 Initialised once in `App.jsx` `useEffect`. Duration `1.4`, exponential easing.
 Destroyed on unmount. Works across all pages since `App` wraps all routes.
 
+## Deployment — GitHub + Plesk
+
+**Live site:** https://tnf.tpi.edu.my
+**GitHub repo:** https://github.com/I2bad/TOts-n-Friends-2.git
+**Hosting:** Plesk shared hosting (Apache, no Node.js on server)
+**Web root:** The Plesk File Manager root for `tnf.tpi.edu.my` (NOT httpdocs — files go directly in the domain root)
+
+### How to deploy changes
+
+Follow these steps every time changes need to go live:
+
+1. **Build locally:**
+   ```bash
+   npm run build
+   ```
+   Confirm the build completes with no errors. Output goes to `dist/`.
+
+2. **Delete any `.spline` files from `dist/`** — these are Spline editor files (30+ MB each) that are not used at runtime. The site uses hosted `.splinecode` URLs instead.
+
+3. **Push source code to GitHub:**
+   ```bash
+   git add <changed-files>
+   git commit -m "description of changes"
+   git push origin main
+   ```
+
+4. **Upload built files to Plesk:**
+   - The user must manually upload the **contents of `dist/`** into Plesk File Manager for `tnf.tpi.edu.my`
+   - Replace any changed files (or delete all except `.cagefs` and re-upload everything from `dist/`)
+   - **Critical:** Make sure `.htaccess` is included — it enables SPA routing so direct URL access and page refreshes work on all routes (`/timeline`, `/contact`, `/philosophy`)
+   - Tell the user exactly which files changed so they know what to upload
+
+5. **Verify:** Ask the user to check https://tnf.tpi.edu.my and confirm it works.
+
+### .htaccess (must exist in web root)
+```apache
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]
+```
+This rewrites all non-file requests to `index.html` so React Router handles client-side routing. Without this, refreshing on `/timeline` etc. will 404.
+
+### Important notes
+- There is NO auto-deploy pipeline — Plesk does not serve from the GitHub repo directly
+- Do NOT upload `node_modules/`, `src/`, or other source files to Plesk — only the `dist/` output
+- The `.cagefs` folder in Plesk is a system folder — never delete it
+
 ## Gotchas
 - **Framer Motion + CSS transforms**: Never set `transform` on a `motion.*` element directly — Framer Motion owns the transform pipeline. Wrap in a plain `<div>` for CSS-only transforms (e.g. rotation).
 - **CSS specificity on hover**: Inline `style={{ color }}` beats CSS hover rules. Use pure CSS classes + `!important` for hover colour overrides.
