@@ -23,7 +23,6 @@ import Hero from './components/Hero'
 import Testimonials from './components/Testimonials'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
-import MobileNav from './components/MobileNav'
 import Timeline from './pages/Timeline'
 import Contact from './pages/Contact'
 import Philosophy from './pages/Philosophy'
@@ -32,6 +31,35 @@ import ValuesSection from './pages/About/components/ValuesSection'
 import ProgramsSection from './pages/About/components/ProgramsSection'
 import TeamSection from './pages/About/components/TeamSection'
 
+/* Organic wave divider between sections with different backgrounds */
+function WaveDivider({ from, to, flip = false }) {
+  return (
+    <div
+      aria-hidden="true"
+      style={{ background: to, marginTop: -1, marginBottom: -1, lineHeight: 0, overflow: 'hidden' }}
+    >
+      <svg
+        viewBox="0 0 1440 100"
+        preserveAspectRatio="none"
+        style={{
+          display: 'block',
+          width: '100%',
+          height: 'clamp(40px, 5vw, 80px)',
+          transform: flip ? 'scaleX(-1)' : undefined,
+        }}
+      >
+        <path
+          d="M0,0 L0,60 Q360,100 720,60 Q1080,20 1440,60 L1440,0 Z"
+          fill={from}
+        />
+      </svg>
+    </div>
+  )
+}
+
+const WARM = '#F0EAE0'
+const COOL = '#fcf9f8'
+
 function Home({ onSplineReady }) {
   return (
     <div className="text-on-surface font-body">
@@ -39,18 +67,22 @@ function Home({ onSplineReady }) {
       <main className="relative z-10 bg-background overflow-x-hidden">
         <Nav />
         <Hero onSplineReady={onSplineReady} />
+        <WaveDivider from={WARM} to={COOL} />
         <div id="about">
           <MissionSection />
+          <WaveDivider from={COOL} to={WARM} flip />
           <ValuesSection />
+          <WaveDivider from={WARM} to={COOL} />
           <ProgramsSection />
+          <WaveDivider from={COOL} to={WARM} flip />
           <TeamSection />
         </div>
+        <WaveDivider from={WARM} to={COOL} />
         <Testimonials />
         <CTA />
       </main>
       {/* Footer is fixed behind content — revealed as page scrolls up */}
       <Footer />
-      <MobileNav />
     </div>
   )
 }

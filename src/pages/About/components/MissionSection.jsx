@@ -35,7 +35,7 @@ const fadeUp = {
 
 export default function MissionSection() {
   return (
-    <section data-navtheme="cool" className="py-32 px-6">
+    <section data-navtheme="cool" className="pt-24 pb-28 px-6">
       <div className="max-w-5xl mx-auto">
 
         {/* Section header — two-column */}

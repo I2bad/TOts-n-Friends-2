@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Nav from '../components/Nav'
-import MobileNav from '../components/MobileNav'
 import Footer from '../components/Footer'
 
 const fadeUp = (delay = 0) => ({
@@ -251,7 +250,6 @@ export default function Contact() {
 
       </main>
       <Footer />
-      <MobileNav />
     </div>
   )
 }

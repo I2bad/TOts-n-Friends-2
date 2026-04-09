@@ -78,6 +78,9 @@ export default function Footer() {
     if (!physContainer || !footerEl) return
 
     const startSim = async () => {
+      // Skip heavy physics simulation on mobile devices
+      if (window.innerWidth < 768) return
+
       if (!matterRef.current) {
         matterRef.current = (await import('matter-js')).default
       }
@@ -244,10 +247,10 @@ export default function Footer() {
         className="fixed bottom-0 left-0 right-0 z-0 bg-surface-container-low rounded-t-[4rem] overflow-hidden"
         style={{ height: '80vh' }}
       >
-        {/* ── Physics container ── */}
+        {/* ── Physics container — hidden on mobile (too heavy / buggy on phones) ── */}
         <div
           ref={physContainerRef}
-          className="absolute inset-x-0 pointer-events-none"
+          className="absolute inset-x-0 pointer-events-none hidden md:block"
           style={{ top: -ABOVE }}
         >
           {Array.from({ length: BALL_COUNT }, (_, i) => (

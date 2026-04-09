@@ -8,18 +8,20 @@ export default function Hero({ onSplineReady }) {
   return (
     <section
       id="hero"
-      className="relative min-h-screen overflow-hidden"
-      style={{ background: '#F0EAE0' }}
+      className="relative overflow-hidden"
+      style={{ background: '#F0EAE0', minHeight: 'clamp(500px, 100vh, 1200px)' }}
     >
-      {/* Side-by-side layout: text left, Spline right */}
-      <div className="flex items-center min-h-screen w-full">
+      <div
+        className="flex items-center w-full"
+        style={{ minHeight: 'clamp(500px, 100vh, 1200px)' }}
+      >
 
         {/* Left: text block */}
         <div
           className="relative z-10 flex-shrink-0 pointer-events-none px-6 md:px-0"
           style={{
             width: 'clamp(280px, 42%, 580px)',
-            marginLeft: 'max(24px, calc(50% - 680px))',
+            marginLeft: 'max(16px, calc(50% - 740px))',
           }}
         >
           <motion.div
@@ -61,14 +63,21 @@ export default function Hero({ onSplineReady }) {
           </motion.div>
         </div>
 
-        {/* Right: Spline 3D scene — height slightly overshoots to hide Spline watermark */}
+        {/* Watermark cover — sits over the bottom-right corner where Spline badge appears */}
         <div
-          className="absolute z-0 top-0 right-0 hero-spline-container"
-          style={{ height: 'calc(100% + 60px)', overflow: 'hidden' }}
+          className="absolute bottom-0 right-0 z-20 hidden md:block"
+          style={{ width: 'clamp(120px, 12vw, 220px)', height: 'clamp(36px, 4vw, 70px)', background: '#F0EAE0' }}
+          aria-hidden="true"
+        />
+
+        {/* Spline 3D — hidden on mobile (too heavy / buggy on phones) */}
+        <div
+          className="absolute z-0 top-0 hero-spline-container hidden md:block"
         >
           <InteractiveRobotSpline
             scene={SPLINE_SCENE}
             className="w-full h-full"
+            style={{ width: '100%', height: '100%' }}
             onReady={onSplineReady}
           />
         </div>

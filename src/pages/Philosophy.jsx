@@ -2,7 +2,6 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Nav from '../components/Nav'
-import MobileNav from '../components/MobileNav'
 import Footer from '../components/Footer'
 import logo from '/logo.png'
 
@@ -434,7 +433,6 @@ export default function Philosophy() {
 
       </main>
       <Footer />
-      <MobileNav />
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView, useScroll, useTransform, useMotionTemplate } from 'framer-motion'
 import Nav from '../components/Nav'
-import MobileNav from '../components/MobileNav'
 import Footer from '../components/Footer'
 import logo from '/logo.png'
 
@@ -100,8 +99,8 @@ function TimelineEntry({ milestone, index }) {
         )}
       </div>
 
-      {/* Centre column — dot + year */}
-      <div className="flex flex-col items-center gap-2 relative z-10">
+      {/* Centre column — dot only */}
+      <div className="flex flex-col items-center relative z-10">
         <motion.div
           initial={{ scale: 0 }}
           animate={isInView ? { scale: 1 } : {}}
@@ -109,15 +108,6 @@ function TimelineEntry({ milestone, index }) {
           className="w-4 h-4 rounded-full border-[3px] border-background shadow-lg mt-1"
           style={{ backgroundColor: milestone.color }}
         />
-        <motion.span
-          initial={{ opacity: 0, y: 8 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-          className="font-headline font-black text-xs tracking-widest hidden md:block"
-          style={{ color: milestone.color, writingMode: 'vertical-rl', textOrientation: 'mixed', transform: 'rotate(180deg)' }}
-        >
-          {milestone.year}
-        </motion.span>
       </div>
 
       {/* Right content (desktop odd / all mobile) */}
@@ -269,7 +259,6 @@ export default function Timeline() {
 
       </main>
       <Footer />
-      <MobileNav />
     </div>
   )
 }
