@@ -41,35 +41,40 @@ if (!$name || !filter_var($email, FILTER_VALIDATE_EMAIL) || !$message) {
 
 $from = 'noreply@tnf.tpi.edu.my';
 
-$subject = "New Enquiry from $name" . ($enquiry ? " — $enquiry" : '');
+// Plesk's outbound relay hard-rejects non-ASCII header text (raw em dash caused
+// "550 Subject contains invalid characters"), so MIME-encode anything user-supplied
+// that lands in a header.
+$mimeHeader = fn($v) => mb_encode_mimeheader($v, 'UTF-8', 'B', "\r\n");
+
+$subject = "New Enquiry from $name" . ($enquiry ? " - $enquiry" : '');
 $body =
     "New enquiry from the Tots & Friends website.\n\n"
     . "Name:    $name\n"
     . "Email:   $email\n"
-    . "Phone:   " . ($phone ?: '—') . "\n"
-    . "Type:    " . ($enquiry ?: '—') . "\n\n"
+    . "Phone:   " . ($phone ?: '-') . "\n"
+    . "Type:    " . ($enquiry ?: '-') . "\n\n"
     . "Message:\n$message\n\n"
     . "---\n"
     . "Reply to this email to respond directly to $name.";
 
 $headers =
     "From: Tots n Friends <$from>\r\n"
-    . "Reply-To: $name <$email>\r\n"
+    . "Reply-To: {$mimeHeader($name)} <$email>\r\n"
     . "Content-Type: text/plain; charset=UTF-8";
 
-$sent = mail('hewitt@tpi.edu.my', $subject, $body, $headers);
+$sent = mail('hewitt@tpi.edu.my', $mimeHeader($subject), $body, $headers);
 
 if ($sent) {
     // Auto-reply to customer -- best effort, doesn't affect success response
-    $replySubject = "We've received your enquiry — Tots n Friends";
+    $replySubject = "We've received your enquiry - Tots n Friends";
     $replyBody =
         "Hi $name,\n\n"
         . "Thank you for reaching out to Tots n Friends!\n\n"
-        . "We've received your enquiry and will get back to you as soon as possible, usually within 1–2 business days.\n\n"
+        . "We've received your enquiry and will get back to you as soon as possible, usually within 1-2 business days.\n\n"
         . "Warm regards,\n"
         . "The Tots n Friends Team";
     $replyHeaders = "From: Tots n Friends <$from>\r\nContent-Type: text/plain; charset=UTF-8";
-    mail($email, $replySubject, $replyBody, $replyHeaders);
+    mail($email, $mimeHeader($replySubject), $replyBody, $replyHeaders);
 
     echo json_encode(['success' => true]);
 } else {
